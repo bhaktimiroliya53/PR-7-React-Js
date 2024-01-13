@@ -1,23 +1,23 @@
-import React, {useState , useEffect  } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState }  from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 function View() {
-  const [record, setRecord] = useState([]);
-  const id = Math.floor(Math.random() * 100);
-
-  useEffect(() => {
-    let all = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : []
-    setRecord(all)
-  },[])
+ 
+  const {state , id} = useLocation();
+  const [Record , setRecord] = useState(state)
 
   const deleteData = (id) => {
-    let deleteRecord = record.filter((val) => {
+    let deleteRecord = Record.filter((val) => {
       return val.id !== id;
     })
     setRecord(deleteRecord);
     localStorage.setItem('user' , JSON.stringify(deleteRecord));
     alert("Record is Succesfully Delete")
   }
+  useEffect(() => {
+    let oldRecord = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : []
+    setRecord(oldRecord)
+  }, [])
   
   return (
     <center>
@@ -30,19 +30,21 @@ function View() {
               <th>Name</th>
               <th>Email</th>
               <th>Password</th>
+              <th></th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {
-              record.map((val , i) => { i = i + 1
+             Record && Record.map((val , i) => { i = i + 1
                 return(
                   <tr key={val.id}>
-                    <td>{i}</td>
+                    <td>{val.id}</td>
                     <td>{val.name}</td>
                     <td>{val.email}</td>
                     <td>{val.password}</td>
-                    <td><button onClick={() => deleteData(val.id)}>Delete</button></td>
+                    <td><button onClick={() => deleteData(val.id)} style={{margin : '5px' , padding : '10px 20px' , borderRadius : '10px' , border : '1px solid'}}>Delete</button></td>
+                    <td><button style={{margin : '5px' , padding : '10px 20px' , borderRadius : '10px' , border : '1px solid'}}><Link to={`/EditRecord/${val.id}`}>Edit</Link></button></td>
                   </tr>
                 )
               })

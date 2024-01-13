@@ -17,7 +17,7 @@ body {
   background: -moz-linear-gradient(45deg, rgba(4, 2, 96, 0.7), rgba(195, 86, 196, 0.9)), -moz-linear-gradient(0deg, rgba(51, 136, 140, 0.3), rgba(87, 240, 240, 0.1));
   background: -o-linear-gradient(45deg, rgba(4, 2, 96, 0.7), rgba(195, 86, 196, 0.9)), -o-linear-gradient(0deg, rgba(51, 136, 140, 0.3), rgba(87, 240, 240, 0.1));
   background: linear-gradient(45deg, rgba(4, 2, 96, 0.7), rgba(195, 86, 196, 0.9)), linear-gradient(90deg, rgba(51, 136, 140, 0.3), rgba(87, 240, 240, 0.1));
-  overflow: hidden;
+
 }
 .panel {
   width: 400px;
@@ -203,7 +203,7 @@ body {
 
 .rwd-table tr:first-child {
   border-top: none;
-  background: #000000;
+  background: #022c50;
   color: #fff;
 }
 
@@ -214,7 +214,8 @@ body {
 }
 
 .rwd-table tr:nth-child(odd):not(:first-child) {
-  background-color: #ebf3f9;
+  background-color: #022c50;
+  color: #fff;
 }
 
 .rwd-table th {
@@ -266,9 +267,6 @@ body {
   }
 }
 @media screen and (min-width: 600px) {
-  .rwd-table tr:hover:not(:first-child) {
-    background-color: #d8e7f3;
-  }
   .rwd-table td:before {
     display: none;
   }

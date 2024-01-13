@@ -1,5 +1,5 @@
 import React, { useState, useEffect, } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 
 function Add() {
@@ -8,19 +8,28 @@ function Add() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [record, setRecord] = useState([]);
+  const navigate = useNavigate()
   const id = Math.floor(Math.random() * 100);
 
   const handleSubmit = () => {
+    if (!name || !email || !password) {
+      alert("All field are required");
+      return false;
+    }
+
     let obj = { name, email, password, id };
     let allData = [...record, obj];
-    setRecord(allData);
-    console.log(allData);
     localStorage.setItem('user', JSON.stringify(allData));
+    setRecord(allData);
     setName('')
     setEmail('')
     setPassword('');
+    navigate('/' ,{ state : allData , id : id})
   }
-
+  useEffect(() => {
+    let all = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : []
+    setRecord(all)
+  },[])
 
   return (
     <>
